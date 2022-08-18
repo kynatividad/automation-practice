@@ -1,0 +1,27 @@
+---
+- hosts: aigi-xrvchl002
+  name: Check Apache service
+  tasks:
+  - name: Start service httpd, if not running
+    service:
+      name: httpd
+      state: started
+    become: yes
+
+  - name: Create web directory
+    file:
+      path: /var/www/html/kynatividad
+      state: directory
+    become: yes
+
+  - name: Create webpage
+    copy:
+      content:
+        <html><body><h1>Hello world</h1></body></html>
+      dest: /var/www/html/kynatividad/index.html
+    become: yes
+
+
+    
+
+  

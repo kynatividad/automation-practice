@@ -1,0 +1,17 @@
+---
+- hosts: windows
+  name: Check IIS service
+  tasks:
+    - name: Start service IIS, if not running
+      win_service:
+        name: w3svc
+        state: started
+    - name: Create web directory
+      win_file: 
+        path: C:\inetpub\wwwroot\kynatividad
+        state: directory
+    - name: Create webpage
+      copy:
+        content:
+          <html><body><h1>Hello world</h1></body></html>
+        dest: C:\inetpub\wwwroot\kynatividad\index.html
